@@ -109,7 +109,8 @@ shoebot은 당신의 손이 없어도 신발을 정리해주는 친절한 로봇
          b. 특정 위치의 모형신발을 집을때 gripper의 상태 와 YoloV3로 탐지하는 모형신발의 bounding box의 중심좌표를 미리 기록해둔 5개의 관절 상태와 매칭시킨다.
          c. b를 반복하여 생성한 데이터셋을 기반으로 deeplearning 모델을 생성한다.
 
-      
+      2. Linear 모델과 MLP 모델 비교
+<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/c911a55d-a0f8-4f09-a187-1be4172da2a1" width="40%" height="40%"/>
 
 #### MoveIt를 활용한 manipulator 제어
 
@@ -140,13 +141,18 @@ shoebot은 당신의 손이 없어도 신발을 정리해주는 친절한 로봇
 
 
 ## Pose Estimation
-   모바일 로봇이 이동시 사람을 인식 후 부딪히지 않도록 행동을 예측하는 모델
-   
-   YOLOv8n-pose를 사용하여 사람인식 후 Skeleton Keypoints을 추출
-   
-   Keypoints값 17개는 Skeleton COCO Pose를 기반으로 사용
+### Pose Estimation Part Summary
 
+      모바일 로봇이 이동시 사람을 인식 후 부딪히지 않도록 행동을 예측하는 단계
 
+### Pose Estimation Part technology
+
+#### YOLOv8-pose
+      YOLOv8n-pose를 사용하여 사람인식 후 Skeleton Keypoints을 추출
+   
+      Keypoints값 17개는 Skeleton COCO Pose를 기반으로 사용
+
+#### Pose Estimation을 위한 모델 구축
 <h3 align="center">
 Models
 </h3>
@@ -162,7 +168,32 @@ Models
 ![LSTM](https://github.com/addinedu-ros-2nd/robot-repo-2/assets/132260442/ec9109fa-fbd0-4c6d-972d-f579dab60076)
 
 ## Mobile Robot
------
+### Mobile Robot Part Summary
+      manipulator가 신발을 집은 후 신발장 혹은 손님앞까지 자율주행을 하는 단계
+
+### Mobile Robot Part technology
+
+#### SLAM & Navigation
+      1. 2D Lidar를 이용하여 mobile robot의 활동영역을 mapping
+      2. map을 기반으로 shoebot manager의 지시한 위치로 자율주행
+      (slam 사진 첨부 예정)
+
+#### SSH 연결
+      1. mobile robot의 RasberryPi 와 main pc간의 통신
+      2. 실시간 통신으로 현재 mobile robot의 위치와 상태를 파악가능하고 mobile robot에게 명령을 전달할 수 있음.
+
+### Mobile Robot Part Software & Hardware
+
+#### Software
+      * ROS2
+      * SLAM
+      * Arduino
+
+|Language|Python|C++|     
+|---|---|---|
+|Library|BasicNavigator,rclpy,PoseStamped,TaskResult,PoseWithCovarianceStamped|---|
+      
+      
 # Improvements expected in the future
 
 **아쉬웠던 점, 향후 개선점 기술예정**
@@ -170,7 +201,7 @@ Models
 # Member
 |성함|기술 담당|GITHUB|
 |---|---|---|
-|**오세찬**|manipulator control ROS2 cpp package 작성<br/><br/>  Human 3D trajectory estimation system 구현|---|
+|**오세찬**|manipulator control ROS2 cpp package 작성<br/><br/>  Human 3D trajectory estimation system 구현|[링크](https://github.com/Ohsechan)|
 |**김동우**|2D point & shoot SLAM 맵 구현 및 Mobile robot 제어<br/><br/>  shoe pick & place를 위한 joint angle 데이터 생성 및 딥러닝 모델을 이용한 데이터 증강|[링크](https://github.com/DongUKim)|Face recognition library를 활용한 얼굴인식 및 ID 관리 system 구현<br/><br/>  YOLOv8-Pose, LSTM, Tensor Flow의 CNN을 활용하여 Human Pose estimation 을 위한 LSTM 모델 구현|---|
 |**김명섭**|Face recognition library를 활용한 얼굴인식 및 ID 관리 system 구현<br/><br/>  YOLOv8-Pose, LSTM, Tensor Flow의 CNN을 활용하여 Human Pose estimation 을 위한 LSTM 모델 구현|---|
 |**백세진**|PyQT를 활용하여 GUI생성, ROS연결 통신 <br/><br/>   GUI와 Dashboard를 만들어서 전반적인 상황에 관제 시스템을 만든 모델을 구현했음|---|
