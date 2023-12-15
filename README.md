@@ -1,6 +1,4 @@
 <img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/86723d3a-4c09-41ea-a812-f5b6df4cb52a" width= "110%" height="110%"/>
-
-# Autonomous Mobile Robot과 Manipulator를 활용한 신발 정리 시스템
 ## 1. 프로젝트 요약
 ### 1-1. 설명
 식당 등에서 신발을 분실하는 경우가 있다. 로봇이 사람 대신 신발을 관리해 줄 수 있다면 분실의 위험성을 줄일 수 있다.
@@ -23,6 +21,9 @@
 
 
 ## 2. 프로젝트 구현
+### 2-1. 데모 영상
+[![youtube playlist](http://img.youtube.com/vi/AA3_XLoDVm0/0.jpg)](https://www.youtube.com/playlist?list=PLx5EbqT-6Y09LVs4YXfSDFbNwMVvL6dq-)
+### 2-2. 
 
 # Member
 |성함|기술 담당|GITHUB|
