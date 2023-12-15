@@ -11,7 +11,7 @@
 - Ubuntu 22.04 Desktop
 - ROS2 Humble
 - C++ Library : OpenMANIPULATOR SDK, DYNAMIXEL SDK
-- Python Library : slam_toolbox, Yolov3, opencv-python, PyQt5
+- Python Library : Scikit-learn, slam_toolbox, Yolov3, opencv-python, PyQt5
 ### 1-5. 하드웨어
 - Raspberry pi 4B
 - Arduino Mega
