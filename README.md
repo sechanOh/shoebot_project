@@ -1,202 +1,28 @@
 <img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/86723d3a-4c09-41ea-a812-f5b6df4cb52a" width= "110%" height="110%"/>
 
-
-# Why?
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/6d90a1c4-a6e6-44a0-bfa7-9022e40e8950" width="70%" height="70%"/>
-
-
-직접 손으로 정리하시겠습니까?
-
-아니면 shoebot이 정리해드릴까요?
-
-## Project Introduce
-
-
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/cc05d8f4-d8a5-4d24-9b5d-f5cf5640731c" width="70%" height="70%"/>
-
-shoebot은 당신의 손이 없어도 신발을 정리해주는 친절한 로봇입니다.
-
-# Demo Video(이미지 클릭시 유튜브로 연결됩니다)
-
-
-[![image](https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/d7c48a46-50a9-424f-b440-a319a1571943)](https://www.youtube.com/watch?v=70jTAGOszJk)
-
-
-## Project Keyword
-
-**1. Manipulator pick & place**
-   
-**2. Face Recognition**
-   
-**3. Pose Estimation with LSTM & CNN**
-   
-**4. Autonomous Driving with SLAM**
-
-**5. Main Control System with ROS2**
-
-   
-## Project Summary
-
-
-**1. Manipulator pick & place**
-
-      YOLOv3로 학습한 신발객체 인식 모델을 활용하여 manipulator가 신발을 집고, 신발장에 정리해줍니다.
-
-      이때, manipulator은 MoveIt와 MLP model based DeepLearning로 정밀하게 제어됩니다.
-
-
-**2. Face Recognition**
-
-      Face recognition으로 제공하는 고유ID는 똑같은 신발들 사이에서도 여러분의 신발을 찾을 수 있게 도와줍니다.
-
-
-**3. Pose Estimation with LSTM & CNN**
-
-      LSTM 과 CNN으로 학습된 행동예측 모델은 ShoeBot이 신발을 정리하면서도 여러분과 부딪히지않게 해줍니다.
-
-      당신이 걷던, 뛰던, 혹은 물구나무를 서더라도요.
-
-**4. Autonomous Driving with SLAM**
-
-      manipulator가 여러분의 손을 대신해준다면, SLAM을 기반으로 구축한 Automous Driving은 여러분의 발이 되어줄겁니다.
-
-      다만, 여러분들이 찾지않는다면 ShoeBot은 충전소에서 쉬고있겠죠
-
-**5. Main Control System with ROS2**
-
-      ShoeBot에게는 든든한 친구 ShoeManager가 있습니다.
-
-      Shoemanager은 여러분이 도움을 필요로 할때마다 ShoeBot에게 귀뜀을 해주지요. 물론 그 반대도 가능하도록 도와줍니다!
-
-      Pose estimation으로 행동예측을 하여 Mobile robot을 회피기동
-## Scenario & System Diagram
-
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/5a99e0b4-a979-45f4-9dea-5e57a060ab19" width="40%" height="40%"/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/f5ffd09c-155c-4951-af13-9e8d26a2af4c" width="40%" height="40%"/>
-
-
-
-## Manipulator Motion Planning
-
-
-
-### Motion Planning Part Summary
-      manipulator가 신발을 감지 한 후에 신발을 집고 주행로봇이나 신발장에 올리기 위해 필요한 동작을 구현하는 단계
-
-
-### Motion Planning Part technology 
-
-#### Custom cpp package 
-
-      1. 기존에는 5-DOF만 제어가능한 패키지를 DOF에 관계없이 제어할 수 있도록 별도로 custom
-      2. dynamic cell control table 을 확인 할 수 있도록 기능 추가
-      3. ROS2 Humble에서 실행이 가능하도록 custom
-
-#### YOLOv3 신발객체탐지 모델
-
-      1. webcam으로 촬영한 약 450개의 모형신발 사진을 사용하여 YoloV3 학습모델을 생성
-      2. manipulator의 gripper에 동일한 webcam을 장착하여 모형신발을 탐지
-
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/d2621362-ff64-4c15-aaed-f4ba40c0d72b" width="40%" height="40%"/>
-
-#### 신발위치추정 모델
-
-      1. shoe pick & place 를 위해서 모형신발의 위치를 추정할 수 있는 모델을 구축
-         a. 다양한 위치에 모형신발을 두고, 해당 위치에 신발을 집을수 있는 pose를 설정한다. 이때의 gripper를 제외한 5개의 관절 상태를 기록해둔다.
-         b. 특정 위치의 모형신발을 집을때 gripper의 상태 와 YoloV3로 탐지하는 모형신발의 bounding box의 중심좌표를 미리 기록해둔 5개의 관절 상태와 매칭시킨다.
-         c. b를 반복하여 생성한 데이터셋을 기반으로 deeplearning 모델을 생성한다.
-
-      2. Linear 모델과 MLP 모델 비교
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/c911a55d-a0f8-4f09-a187-1be4172da2a1" width="40%" height="40%"/>
-
-#### MoveIt를 활용한 manipulator 제어
-
-      1. ROS1의 MoveIt로 manipulator path planning 
-      (moveit 사진 첨부 예정)
-
-
-
-### Motion Planning Part Software & Hardware
-
-#### Software
-      * ROS1 & 2
-      * YoloV3
-      
-|Language|Python|C++|
-|---|---|---|
-|Library|rclpy,pathlib, torch, cv2,ai_manipulation,sklearn.linear_model|rclcpp,Dynamicxel,chrono|
-
-#### Hardware
-<img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/05088ef2-2538-4654-9fcd-4d721e202420" width="40%" height="40%"/>
-
-
-
-
-
-## Face Recognition
-
-
-
-## Pose Estimation
-### Pose Estimation Part Summary
-
-      모바일 로봇이 이동시 사람을 인식 후 부딪히지 않도록 행동을 예측하는 단계
-
-### Pose Estimation Part technology
-
-#### YOLOv8-pose
-      YOLOv8n-pose를 사용하여 사람인식 후 Skeleton Keypoints을 추출
-   
-      Keypoints값 17개는 Skeleton COCO Pose를 기반으로 사용
-
-#### Pose Estimation을 위한 모델 구축
-<h3 align="center">
-Models
-</h3>
-
-
----
-**1. Decision Tree**
-
-![DecisionTree](https://github.com/addinedu-ros-2nd/robot-repo-2/assets/132260442/a2118e91-d5fd-491e-8b29-bb1d73c70438)
-
-**2. LSTM(Long Short Term Memory)**
-
-![LSTM](https://github.com/addinedu-ros-2nd/robot-repo-2/assets/132260442/ec9109fa-fbd0-4c6d-972d-f579dab60076)
-
-## Mobile Robot
-### Mobile Robot Part Summary
-      manipulator가 신발을 집은 후 신발장 혹은 손님앞까지 자율주행을 하는 단계
-
-### Mobile Robot Part technology
-
-#### SLAM & Navigation
-      1. 2D Lidar를 이용하여 mobile robot의 활동영역을 mapping
-      2. map을 기반으로 shoebot manager의 지시한 위치로 자율주행
-      (slam 사진 첨부 예정)
-
-#### SSH 연결
-      1. mobile robot의 RasberryPi 와 main pc간의 통신
-      2. 실시간 통신으로 현재 mobile robot의 위치와 상태를 파악가능하고 mobile robot에게 명령을 전달할 수 있음.
-
-### Mobile Robot Part Software & Hardware
-
-#### Software
-      * ROS2
-      * SLAM
-      * Arduino
-
-|Language|Python|C++|     
-|---|---|---|
-|Library|BasicNavigator,rclpy,PoseStamped,TaskResult,PoseWithCovarianceStamped|---|
-      
-      
-# Improvements expected in the future
-
-**아쉬웠던 점, 향후 개선점 기술예정**
+# Autonomous Mobile Robot과 Manipulator를 활용한 신발 정리 시스템
+## 1. 프로젝트 요약
+### 1-1. 설명
+식당 등에서 신발을 분실하는 경우가 있다. 로봇이 사람 대신 신발을 관리해 줄 수 있다면 분실의 위험성을 줄일 수 있다.
+본 프로젝트에서는 손님의 얼굴을 인식하고 ID를 부여하여 입장 및 퇴장을 감지할 수 있다. 신발을 잡기 위해 6 자유도를 가진 Manipulator를 제작하고, 딥러닝 기반 motion planning을 통해 신발을 pick 하는 기능을 구현하였다. 또한, LiDAR SLAM 및 Navigation을 통해 Autonomous Mobile Robot이 신발장까지 자율주행을 할 수 있도록 구현하였다. 이 모든 기능의 진행 상황을 관리자가 그래픽으로 확인할 수 있도록 GUI 프로그램도 제작하였다.
+### 1-3. 개발 규모
+- 인원 : 6명
+- 일시 : 2023.08 ~ 2023.11
+### 1-4. 개발환경
+- Ubuntu 22.04 Desktop
+- ROS2 Humble
+- C++ Library : OpenMANIPULATOR SDK, DYNAMIXEL SDK
+- Python Library : slam_toolbox, Yolov3, opencv-python, PyQt5
+### 1-5. 하드웨어
+- Raspberry pi 4B
+- Arduino Mega
+- YDLIDAR X2
+- OpenMANIPULATOR-X
+- DYNAMIXEL XM430-W350-T
+- mono usb camera
+
+
+## 2. 프로젝트 구현
 
 # Member
 |성함|기술 담당|GITHUB|
