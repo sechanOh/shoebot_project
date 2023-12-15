@@ -1,4 +1,5 @@
 <img src="https://github.com/addinedu-ros-2nd/robot-repo-2/assets/140477778/86723d3a-4c09-41ea-a812-f5b6df4cb52a" width= "110%" height="110%"/>
+
 ## 1. 프로젝트 요약
 ### 1-1. 설명
 식당 등에서 신발을 분실하는 경우가 있다. 로봇이 사람 대신 신발을 관리해 줄 수 있다면 분실의 위험성을 줄일 수 있다.
