@@ -23,7 +23,10 @@
 ## 2. 프로젝트 구현
 ### 2-1. 데모 영상
 [![youtube playlist](http://img.youtube.com/vi/AA3_XLoDVm0/0.jpg)](https://www.youtube.com/playlist?list=PLx5EbqT-6Y09LVs4YXfSDFbNwMVvL6dq-)
-### 2-2. 
+### 2-2. 6 자유도 로봇팔
+![manipulator_with_camera1](https://github.com/Ohsechan/shoebot_project/assets/77317210/3b2f3aec-766f-45b7-ad08-2e965c2d41e0)
+### 2-3. 모바일 로봇
+![minibot1](https://github.com/Ohsechan/shoebot_project/assets/77317210/738323c0-8377-42d9-a05d-6b93543d4fe2)
 
 # Member
 |성함|기술 담당|GITHUB|
